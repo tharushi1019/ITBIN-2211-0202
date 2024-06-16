@@ -120,7 +120,7 @@ public class FindLesson extends javax.swing.JFrame {
         FindBtn = new javax.swing.JButton();
         dayChooser = new com.toedter.calendar.JDateChooser();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 51));
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(10, 10, 10, 10, new java.awt.Color(102, 0, 0)));

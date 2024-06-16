@@ -41,7 +41,7 @@ public class ViewSubjects extends javax.swing.JFrame {
         subjectTable = new javax.swing.JTable();
         homeButton = new java.awt.Button();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 51));
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(10, 10, 10, 10, new java.awt.Color(102, 0, 0)));

@@ -6,7 +6,11 @@
 package View;
 
 import Controller.LessonController;
+import Model.DBConnection;
+import Model.DBSearch;
 import com.toedter.calendar.JDateChooser;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
@@ -57,8 +61,9 @@ public class AddLesson extends javax.swing.JFrame {
         resetBtn = new javax.swing.JButton();
         submitBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
+        loadBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 51));
@@ -73,7 +78,12 @@ public class AddLesson extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Subject :");
 
-        subjectCMB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Science", "English", "Mathematics", "ICT", "History" }));
+        subjectCMB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None" }));
+        subjectCMB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subjectCMBActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -139,6 +149,14 @@ public class AddLesson extends javax.swing.JFrame {
             }
         });
 
+        loadBtn.setBackground(java.awt.SystemColor.activeCaption);
+        loadBtn.setText("Load");
+        loadBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -155,14 +173,19 @@ public class AddLesson extends javax.swing.JFrame {
                                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(subjectCMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(subjectCMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(loadBtn))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(gradeCMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(151, 151, 151)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel5)
                                             .addComponent(jLabel3)))
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(56, 56, 56)
+                                        .addComponent(jLabel6))
                                     .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,7 +218,8 @@ public class AddLesson extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(subjectCMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(lesson, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lesson, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(loadBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,6 +315,22 @@ public class AddLesson extends javax.swing.JFrame {
         clearField();        
     }//GEN-LAST:event_resetBtnActionPerformed
 
+    private void loadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadBtnActionPerformed
+        ResultSet r = new DBSearch().searchSubjects();
+        subjectCMB.removeAllItems();
+        try {
+            while (r.next()) {
+                subjectCMB.addItem(r.getString("subName"));
+            }
+            DBConnection.closeCon();
+        } catch (SQLException e) {
+        }
+    }//GEN-LAST:event_loadBtnActionPerformed
+
+    private void subjectCMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjectCMBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_subjectCMBActionPerformed
+
     public void clearField(){
             
             lesson.setText("");
@@ -351,6 +391,7 @@ public class AddLesson extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea learningTA;
     private javax.swing.JTextField lesson;
+    private javax.swing.JButton loadBtn;
     private javax.swing.JButton resetBtn;
     private javax.swing.JComboBox<String> subjectCMB;
     private javax.swing.JButton submitBtn;

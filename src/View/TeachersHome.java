@@ -43,7 +43,7 @@ public class TeachersHome extends javax.swing.JFrame {
 
         jMenuItem3.setText("jMenuItem3");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 51));

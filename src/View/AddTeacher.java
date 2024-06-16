@@ -62,7 +62,7 @@ public class AddTeacher extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         email = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 51));
